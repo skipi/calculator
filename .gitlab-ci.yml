@@ -11,7 +11,7 @@ doctest:
     - mix test --exclude nodoctest
   artifacts:
     reports:
-      junit: /tmp/calculator-test-junit-report.xml
+      junit: calculator-test-junit-report.xml
 
 
 nodoctest:
@@ -20,4 +20,4 @@ nodoctest:
     - mix test --only nodoctest
   artifacts:
     reports:
-      junit: /tmp/calculator-test-junit-report.xml
+      junit: calculator-test-junit-report.xml

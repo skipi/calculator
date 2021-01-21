@@ -25,3 +25,5 @@ calculator-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+calculator-test-junit-report.xml
