@@ -15,7 +15,7 @@ blocks:
             - mix local.hex --force
             - mix local.rebar --force
             - cache restore
-            - '''mix do deps.get, compile --warnings-as-errors'''
+            - 'mix do deps.get, compile --warnings-as-errors'
             - cache store
             - mix test
             - cd ../
