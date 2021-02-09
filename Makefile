@@ -4,7 +4,7 @@ all: ruby.junit elixir.junit js.junit
 
 ruby.junit:
 	- cd ruby && \
-		bundle exec rspec --format RspecJunitFormatter --out ../test-results/rspec.xml
+		bundle exec rspec --format RspecJunitFormatter --out ./junit.xml
 
 elixir.junit:
 	- cd elixir && \

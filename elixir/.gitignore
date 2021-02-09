@@ -27,4 +27,4 @@ calculator-*.tar
 /tmp
 /.elixir_ls
 ruby
-*.xml
+/junit.xml
