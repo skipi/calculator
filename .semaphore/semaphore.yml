@@ -1,0 +1,52 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Elixir tests
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - cd elixir
+            - mix local.hex --force
+            - mix local.rebar --force
+            - cache restore
+            - 'mix do deps.get, compile --warnings-as-errors'
+            - cache store
+            - mix test
+            - cd ../
+            - artifact push workflow test-results/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+      prologue:
+        commands:
+          - kiex install 1.11
+          - sem-version elixir 1.11
+    dependencies: []
+  - name: Mocha tests
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+  - name: RSpec tests
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+  - name: Prepare results
+    dependencies:
+      - Elixir tests
+      - Mocha tests
+      - RSpec tests
+    task:
+      jobs:
+        - name: Combine artifacts
+          commands: []
+        - name: Parse results
+          commands: []
+        - name: Push outputs
+          commands: []
