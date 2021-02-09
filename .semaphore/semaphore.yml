@@ -18,7 +18,6 @@ blocks:
             - 'mix do deps.get, compile --warnings-as-errors'
             - cache store
             - mix test
-            - cd ../
       prologue:
         commands:
           - kiex install 1.11
@@ -26,7 +25,7 @@ blocks:
       epilogue:
         always:
           commands:
-            - artifact push workflow test-results/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - artifact push workflow elixir/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
     dependencies: []
   - name: Mocha tests
     dependencies: []
