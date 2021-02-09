@@ -32,7 +32,17 @@ blocks:
     task:
       jobs:
         - name: 'Job #1'
-          commands: []
+          commands:
+            - checkout
+            - cd js
+            - cache restore
+            - npm install
+            - cache store
+            - npm test
+      epilogue:
+        always:
+          commands:
+            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
   - name: RSpec tests
     dependencies: []
     task:
@@ -40,6 +50,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - cd ruby
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
