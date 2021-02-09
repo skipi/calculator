@@ -19,11 +19,14 @@ blocks:
             - cache store
             - mix test
             - cd ../
-            - artifact push workflow test-results/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
       prologue:
         commands:
           - kiex install 1.11
           - sem-version elixir 1.11
+      epilogue:
+        always:
+          commands:
+            - artifact push workflow test-results/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
     dependencies: []
   - name: Mocha tests
     dependencies: []
