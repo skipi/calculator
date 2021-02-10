@@ -23,7 +23,7 @@ blocks:
         commands:
           - kiex install 1.11
           - sem-version elixir 1.11
-          - mkdir -t /tmp/test-results
+          - mkdir -p /tmp/test-results
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
@@ -55,7 +55,7 @@ blocks:
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
-          - mkdir -t /tmp/test-results
+          - mkdir -p /tmp/test-results
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
@@ -79,7 +79,7 @@ blocks:
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
-          - mkdir -t /tmp/test-results
+          - mkdir -p /tmp/test-results
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
