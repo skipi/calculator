@@ -26,9 +26,11 @@ blocks:
         always:
           commands:
             - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
-    dependencies: []
+    dependencies:
+      - Build CLI
   - name: Mocha tests
-    dependencies: []
+    dependencies:
+      - Build CLI
     task:
       jobs:
         - name: 'Job #1'
@@ -44,7 +46,8 @@ blocks:
           commands:
             - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
   - name: RSpec tests
-    dependencies: []
+    dependencies:
+      - Build CLI
     task:
       jobs:
         - name: 'Job #1'
@@ -73,3 +76,14 @@ blocks:
           commands: []
         - name: Push outputs
           commands: []
+  - name: Build CLI
+    dependencies: []
+    task:
+      prologue:
+        commands:
+          - artifacts push workflow result_parser bin/test-result
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'git clone https://github.com/renderedtext/test-results-cli.git .'
+            - make
