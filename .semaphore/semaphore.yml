@@ -23,10 +23,15 @@ blocks:
         commands:
           - kiex install 1.11
           - sem-version elixir 1.11
+          - mkdir -t /tmp/test-results
+          - artifact pull workflow bin/test-result -d /tmp/bin/test-result
+          - 'export PATH=$PATH:/tmp/bin'
+          - chmod +x /tmp/bin/test-result
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result junit.xml /tmp/test-results/junit.json
+            - artifact push job /tmp/test-results -d test-results
     dependencies:
       - Build CLI
   - name: Mocha tests
@@ -46,7 +51,14 @@ blocks:
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result junit.xml /tmp/test-results/junit.json
+            - artifact push job /tmp/test-results -d test-results
+      prologue:
+        commands:
+          - mkdir -t /tmp/test-results
+          - artifact pull workflow bin/test-result -d /tmp/bin/test-result
+          - 'export PATH=$PATH:/tmp/bin'
+          - chmod +x /tmp/bin/test-result
   - name: RSpec tests
     dependencies:
       - Build CLI
@@ -59,17 +71,15 @@ blocks:
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - bundle exec rspec --format RspecJunitFormatter --out ./junit.xml
+            - bundle exec rspec --format RspecJunitFormatter --out /tmp/test-results/junit.xml
       epilogue:
         always:
           commands:
-            - test-result junit.xml junit.json
-            - mkdir -p /tmp/test-results
-            - cp junit.json /tmp/test-results
-            - cp junit.xml /tmp/test-results
+            - test-result junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
+          - mkdir -t /tmp/test-results
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
