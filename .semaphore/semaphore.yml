@@ -82,7 +82,8 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - 'git clone https://github.com/renderedtext/test-results-cli.git .'
+            - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
+            - cd test-results-cli
             - make
       epilogue:
         on_pass:
