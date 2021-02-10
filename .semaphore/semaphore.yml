@@ -79,11 +79,12 @@ blocks:
   - name: Build CLI
     dependencies: []
     task:
-      prologue:
-        commands:
-          - artifacts push workflow result_parser bin/test-result
       jobs:
         - name: 'Job #1'
           commands:
             - 'git clone https://github.com/renderedtext/test-results-cli.git .'
             - make
+      epilogue:
+        on_pass:
+          commands:
+            - artifacts push workflow result_parser bin/test-result
