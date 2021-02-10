@@ -63,7 +63,11 @@ blocks:
       epilogue:
         always:
           commands:
-            - test-result junit.xml
+            - test-result junit.xml junit.json
+            - mkdir -p /tmp/test-results
+            - cp junit.json /tmp/test-results
+            - cp junit.xml /tmp/test-results
+            - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
