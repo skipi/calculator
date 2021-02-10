@@ -10,7 +10,6 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - exit 1
             - checkout
             - cd elixir
             - mix local.hex --force
@@ -41,7 +40,6 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - exit 1
             - checkout
             - cd js
             - cache restore
