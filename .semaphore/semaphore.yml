@@ -88,5 +88,5 @@ blocks:
       epilogue:
         on_pass:
           commands:
-            - artifact push workflow result_parser bin/test-result
+            - artifact push workflow result_parser -d bin/test-result
             - exit 1
