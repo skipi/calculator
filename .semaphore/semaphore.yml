@@ -59,14 +59,11 @@ blocks:
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - bundle exec rspec
-            - test-result junit.xml
-        - name: 'Job #2'
-          commands: []
+            - bundle exec rspec --format RspecJunitFormatter --out ./junit.xml
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result junit.xml
       prologue:
         commands:
           - artifact pull /bin/test-result /usr/bin/test-result
