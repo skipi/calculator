@@ -10,6 +10,7 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
+            - exit 1
             - checkout
             - cd elixir
             - mix local.hex --force
@@ -35,6 +36,7 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
+            - exit 1
             - checkout
             - cd js
             - cache restore
@@ -58,10 +60,16 @@ blocks:
             - bundle install --deployment --path vendor/bundle
             - cache store
             - bundle exec rspec
+            - test-result junit.xml
+        - name: 'Job #2'
+          commands: []
       epilogue:
         always:
           commands:
             - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+      prologue:
+        commands:
+          - artifact pull /bin/test-result /usr/bin/test-result
   - name: Prepare results
     dependencies:
       - Elixir tests
@@ -84,5 +92,7 @@ blocks:
             - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
             - cd test-results-cli
             - make
+      epilogue:
+        on_pass:
+          commands:
             - artifact push workflow result_parser -d bin/test-result
-            - exit 1
