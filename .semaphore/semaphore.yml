@@ -57,8 +57,7 @@ blocks:
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - TB_RSPEC_OPTIONS='--format RspecJunitFormatter --out junit.xml' bundle exec rspec_booster --job $SEMAPHORE_JOB_INDEX/$SEMAPHORE_JOB_COUNT
-          parallelism: 4
+            - bundle exec rspec
       epilogue:
         always:
           commands:
