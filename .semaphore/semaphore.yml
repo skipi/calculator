@@ -66,7 +66,7 @@ blocks:
             - test-result junit.xml
       prologue:
         commands:
-          - artifact pull /bin/test-result /usr/bin/test-result
+          - artifact pull workflow bin/test-result -d /usr/bin/test-result
   - name: Prepare results
     dependencies:
       - Elixir tests
