@@ -10,6 +10,7 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
+            - exit 1
             - checkout
             - cd elixir
             - mix local.hex --force
@@ -26,13 +27,16 @@ blocks:
         always:
           commands:
             - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
-    dependencies: []
+    dependencies:
+      - Build CLI
   - name: Mocha tests
-    dependencies: []
+    dependencies:
+      - Build CLI
     task:
       jobs:
         - name: 'Job #1'
           commands:
+            - exit 1
             - checkout
             - cd js
             - cache restore
@@ -44,7 +48,8 @@ blocks:
           commands:
             - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
   - name: RSpec tests
-    dependencies: []
+    dependencies:
+      - Build CLI
     task:
       jobs:
         - name: 'Job #1'
@@ -58,7 +63,16 @@ blocks:
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result junit.xml junit.json
+            - mkdir -p /tmp/test-results
+            - cp junit.json /tmp/test-results
+            - cp junit.xml /tmp/test-results
+            - artifact push job /tmp/test-results -d test-results
+      prologue:
+        commands:
+          - artifact pull workflow bin/test-result -d /tmp/bin/test-result
+          - 'export PATH=$PATH:/tmp/bin'
+          - chmod +x /tmp/bin/test-result
   - name: Prepare results
     dependencies:
       - Elixir tests
@@ -72,3 +86,16 @@ blocks:
           commands: []
         - name: Push outputs
           commands: []
+  - name: Build CLI
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
+            - cd test-results-cli
+            - make
+      epilogue:
+        on_pass:
+          commands:
+            - artifact push workflow result_parser -d bin/test-result
