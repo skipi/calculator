@@ -29,7 +29,7 @@ blocks:
       epilogue:
         always:
           commands:
-            - test-result junit.xml /tmp/test-results/junit.json
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
     dependencies:
       - Build CLI
@@ -49,7 +49,7 @@ blocks:
       epilogue:
         always:
           commands:
-            - test-result junit.xml /tmp/test-results/junit.json
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
@@ -73,7 +73,7 @@ blocks:
       epilogue:
         always:
           commands:
-            - test-result junit.xml /tmp/test-results/junit.json
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
