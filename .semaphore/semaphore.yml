@@ -84,8 +84,5 @@ blocks:
             - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
             - cd test-results-cli
             - make
-      epilogue:
-        on_pass:
-          commands:
             - artifact push workflow result_parser -d bin/test-result
             - exit 1
