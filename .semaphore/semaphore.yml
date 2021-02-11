@@ -81,19 +81,6 @@ blocks:
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
-  - name: Prepare results
-    dependencies:
-      - Elixir tests
-      - Mocha tests
-      - RSpec tests
-    task:
-      jobs:
-        - name: Combine artifacts
-          commands: []
-        - name: Parse results
-          commands: []
-        - name: Push outputs
-          commands: []
   - name: Build CLI
     dependencies: []
     task:
