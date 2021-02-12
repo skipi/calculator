@@ -103,7 +103,7 @@ blocks:
     task:
       prologue:
         commands:
-          - brew install coreutils curl git
+          - brew install coreutils curl
           - brew install asdf
           - echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.bash_profile
           - asdf plugin-add erlang
