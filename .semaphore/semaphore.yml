@@ -10,7 +10,6 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - exit 1
             - checkout
             - cd elixir
             - mix local.hex --force
@@ -23,20 +22,24 @@ blocks:
         commands:
           - kiex install 1.11
           - sem-version elixir 1.11
+          - mkdir -p /tmp/test-results
+          - artifact pull workflow bin/test-result -d /tmp/bin/test-result
+          - 'export PATH=$PATH:/tmp/bin'
+          - chmod +x /tmp/bin/test-result
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
+            - artifact push job /tmp/test-results -d test-results
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
   - name: Mocha tests
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - exit 1
             - checkout
             - cd js
             - cache restore
@@ -46,10 +49,17 @@ blocks:
       epilogue:
         always:
           commands:
-            - artifact push workflow junit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
+            - artifact push job /tmp/test-results -d test-results
+      prologue:
+        commands:
+          - mkdir -p /tmp/test-results
+          - artifact pull workflow bin/test-result -d /tmp/bin/test-result
+          - 'export PATH=$PATH:/tmp/bin'
+          - chmod +x /tmp/bin/test-result
   - name: RSpec tests
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
     task:
       jobs:
         - name: 'Job #1'
@@ -59,34 +69,19 @@ blocks:
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store
-            - bundle exec rspec --format RspecJunitFormatter --out ./junit.xml
+            - bundle exec rspec --format RspecJunitFormatter --out /tmp/test-results/junit.xml
       epilogue:
         always:
           commands:
-            - test-result junit.xml junit.json
-            - mkdir -p /tmp/test-results
-            - cp junit.json /tmp/test-results
-            - cp junit.xml /tmp/test-results
+            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
       prologue:
         commands:
+          - mkdir -p /tmp/test-results
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
-  - name: Prepare results
-    dependencies:
-      - Elixir tests
-      - Mocha tests
-      - RSpec tests
-    task:
-      jobs:
-        - name: Combine artifacts
-          commands: []
-        - name: Parse results
-          commands: []
-        - name: Push outputs
-          commands: []
-  - name: Build CLI
+  - name: Build CLI - Linux
     dependencies: []
     task:
       jobs:
@@ -98,4 +93,8 @@ blocks:
       epilogue:
         on_pass:
           commands:
-            - artifact push workflow result_parser -d bin/test-result
+            - artifact push workflow result_parser -d bin/test-result-linux
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu1804
