@@ -103,13 +103,17 @@ blocks:
     task:
       prologue:
         commands:
-          - kiex install 1.11
-          - sem-version elixir 1.11
+          - brew install coreutils curl git
+          - brew install asdf
+          - echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.bash_profile
+          - asdf plugin-add erlang
+          - asdf plugin-add elixir
       jobs:
         - name: 'Build CLI'
           commands:
             - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
             - cd test-results-cli
+            - asdf install
             - make
       epilogue:
         on_pass:
