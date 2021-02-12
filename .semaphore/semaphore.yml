@@ -85,7 +85,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Build CLI'
           commands:
             - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
             - cd test-results-cli
@@ -98,3 +98,20 @@ blocks:
         machine:
           type: e1-standard-2
           os_image: ubuntu1804
+  - name: Build CLI - Mac
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Build CLI'
+          commands:
+            - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
+            - cd test-results-cli
+            - make
+      epilogue:
+        on_pass:
+          commands:
+            - artifact push workflow result_parser -d bin/test-result-mac
+      agent:
+        machine:
+          type: a1-standard-4
+          os_image: macos-xcode11
