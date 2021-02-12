@@ -32,10 +32,10 @@ blocks:
             - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
             - artifact push job /tmp/test-results -d test-results
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
   - name: Mocha tests
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
     task:
       jobs:
         - name: 'Job #1'
@@ -59,7 +59,7 @@ blocks:
           - chmod +x /tmp/bin/test-result
   - name: RSpec tests
     dependencies:
-      - Build CLI
+      - Build CLI - Linux
     task:
       jobs:
         - name: 'Job #1'
@@ -81,7 +81,7 @@ blocks:
           - artifact pull workflow bin/test-result -d /tmp/bin/test-result
           - 'export PATH=$PATH:/tmp/bin'
           - chmod +x /tmp/bin/test-result
-  - name: Build CLI
+  - name: Build CLI - Linux
     dependencies: []
     task:
       jobs:
@@ -93,4 +93,8 @@ blocks:
       epilogue:
         on_pass:
           commands:
-            - artifact push workflow result_parser -d bin/test-result
+            - artifact push workflow result_parser -d bin/test-result-linux
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu1804
