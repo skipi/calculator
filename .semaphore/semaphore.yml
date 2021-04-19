@@ -8,7 +8,7 @@ blocks:
   - name: Elixir tests
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Job'
           commands:
             - checkout
             - cd elixir
