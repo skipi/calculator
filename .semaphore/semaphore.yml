@@ -8,18 +8,9 @@ blocks:
   - name: Elixir tests
     task:
       jobs:
-        - name: 'Job'
+        - name: Job
           commands:
-            - checkout
-            - cd elixir
-            - mix local.hex --force
-            - mix local.rebar --force
-            - cache restore
-            - 'mix do deps.get, compile --warnings-as-errors'
-            - cache store
-            - mix test
-            - cd ../
-            - artifact push workflow test-results/exunit.xml -d test_results/job_$SEMAPHORE_JOB_ID.xml
+            - (exit 33)
       prologue:
         commands:
           - kiex install 1.11
