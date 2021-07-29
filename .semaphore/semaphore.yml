@@ -21,7 +21,8 @@ blocks:
     task:
       jobs:
         - name: 'Job #1'
-          commands: []
+          commands:
+            - (exit 33)
   - name: RSpec tests
     dependencies: []
     task:
