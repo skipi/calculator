@@ -3,42 +3,11 @@ name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
-  - name: Elixir tests
-    task:
-      jobs:
-        - name: Job
-          commands:
-            - (exit 33)
-      prologue:
-        commands:
-          - kiex install 1.11
-          - sem-version elixir 1.11
-    dependencies: []
-  - name: Mocha tests
-    dependencies: []
+  - name: 'Block #1'
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - (exit 33)
-  - name: RSpec tests
-    dependencies: []
-    task:
-      jobs:
-        - name: 'Job #1'
-          commands: []
-  - name: Prepare results
-    dependencies:
-      - Elixir tests
-      - Mocha tests
-      - RSpec tests
-    task:
-      jobs:
-        - name: Combine artifacts
-          commands: []
-        - name: Parse results
-          commands: []
-        - name: Push outputs
-          commands: []
+            - checkout
