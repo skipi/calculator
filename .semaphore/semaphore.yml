@@ -27,8 +27,23 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: 'Job #1'
-          commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        - commands: []
+        
   - name: Prepare results
     dependencies:
       - Elixir tests
