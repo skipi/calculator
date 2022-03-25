@@ -3,82 +3,11 @@ name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
-  - name: Elixir tests
-    task:
-      jobs:
-        - name: Job
-          commands:
-            - (exit 33)
-      prologue:
-        commands:
-          - kiex install 1.11
-          - sem-version elixir 1.11
-    dependencies: []
-  - name: Mocha tests
-    dependencies: []
+  - name: 'Block #1'
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - (exit 33)
-  - name: RSpec tests
-    dependencies: []
-    task:
-      jobs:
-        - commands: []
-          name: Nameless 1
-        - commands: []
-          name: Nameless 2
-        - commands: []
-          name: Nameless 3
-        - commands: []
-          name: Nameless 4
-        - commands: []
-          name: Nameless 5
-        - commands: []
-          name: Nameless 6
-        - commands: []
-          name: Nameless 7
-        - commands: []
-          name: Nameless 8
-        - commands: []
-          name: Nameless 9
-        - commands: []
-          name: Nameless 10
-        - commands: []
-          name: Nameless 11
-        - commands: []
-          name: Nameless 12
-        - commands: []
-          name: Nameless 13
-        - commands: []
-          name: Nameless 14
-        - commands: []
-          name: Nameless 15
-        - commands: []
-          name: Nameless 16
-  - name: Prepare results
-    dependencies:
-      - Elixir tests
-      - Mocha tests
-      - RSpec tests
-    task:
-      jobs:
-        - name: Combine artifacts
-          commands: []
-        - name: Parse results
-          commands: []
-        - name: Push outputs
-          commands: []
-after_pipeline:
-  task:
-    jobs:
-      - name: 'Job #1'
-        commands:
-          - sleep 20
-          - echo "Test"
-promotions:
-  - name: Promotion 1
-    pipeline_file: pipeline_2.yml
+            - checkout
