@@ -28,6 +28,7 @@ blocks:
           commands:
             - checkout
             - test-results publish go.xml
+            - echo test
 
   - name: failing spec
     dependencies: []
