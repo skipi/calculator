@@ -19,7 +19,6 @@ after_pipeline:
           - sudo mv test-results /usr/local/bin/test-results
           - sudo chmod +x /usr/local/bin/test-results
           - test-results gen-pipeline-report
-          
 blocks:
   - name: passing spec
     dependencies: []
