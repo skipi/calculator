@@ -4,6 +4,12 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - artifact pull project -d /tmp/test-results test-results
+      - chmod +x /tmp/test-results
+      - sudo mv /tmp/test-results /usr/local/bin/test-results
 blocks:
   - name: 'Block #1'
     task:
@@ -11,4 +17,13 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
-            - echo "TESTs"
+            - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
+after_pipeline:
+  task:
+    jobs:
+      - name: Publish Tests
+        commands:
+          - artifact pull project -d /tmp/test-results test-results
+          - chmod +x /tmp/test-results
+          - sudo mv /tmp/test-results /usr/local/bin/test-results
+          - test-results gen-pipeline-report
