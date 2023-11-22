@@ -1,6 +1,5 @@
 .PHONY: all ruby.junit elixir.junit js.junit
 
-
 all: ruby.junit elixir.junit js.junit
 
 ruby.junit:
