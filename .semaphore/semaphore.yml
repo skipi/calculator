@@ -11,7 +11,8 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
-            - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
+            - gzip -d fake_reports/report-big.json.gz
+            - artifact push job fake_reports/report-big.json -d test-results/junit.json
 after_pipeline:
   task:
     jobs:
