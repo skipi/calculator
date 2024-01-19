@@ -3,7 +3,7 @@ name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu2004
+    os_image: ubuntu1804
 blocks:
   - name: 'Block #1'
     task:
@@ -11,8 +11,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
-            - gzip -d fake_reports/report-big.json.gz
-            - artifact push job fake_reports/report-big.json -d test-results/junit.json
+            - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
 after_pipeline:
   task:
     jobs:
