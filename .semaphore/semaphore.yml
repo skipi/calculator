@@ -2,29 +2,20 @@ version: v1.0
 name: Complex pipeline without dependencies
 agent:
   machine:
-    type: e1-standard-2
+    type: e2-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: passing spec
-    dependencies: []
+  - name: 'Block #1'
     task:
       jobs:
         - name: provide go tests
           commands:
             - checkout
-            - test-results publish go.xml
-  - name: failing spec
-    dependencies: []
-    task:
-      jobs:
-        - name: provide rspec tests
-          commands:
-            - checkout
-            - test-results publish rspec.xml
-            - exit 1
+            - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
 after_pipeline:
   task:
     jobs:
-      - name: generate pipeline summary
+      - name: Publish Tests
         commands:
           - test-results gen-pipeline-report
+          - echo foo
