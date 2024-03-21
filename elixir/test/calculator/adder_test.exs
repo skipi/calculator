@@ -23,4 +23,16 @@ defmodule Calculator.AdderTest do
       assert Calculator.Adder.run(unquote(a), unquote(b)) == unquote(result)
     end
   end)
+
+  CalculatorTestHelper.define_test_results(5000, 0, 10, fn a, b ->
+    Enum.random([
+      fn a, b -> a + b end,
+      fn a, b -> a - b end
+    ]).call(a, b)
+  end)
+  |> Enum.map(fn {a, b, result} ->
+    test "randomly succeeds or fails with #{a} + #{b} = #{result} #{:rand.uniform()}" do
+      assert Calculator.Adder.run(unquote(a), unquote(b)) == unquote(result)
+    end
+  end)
 end
