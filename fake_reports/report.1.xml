@@ -8,6 +8,12 @@
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
       name="test fails with 8531 + 6984 = 1547 0.09411569755491345" time="0.0000">
     </testcase>
+        <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
+      name="test fails with 321 + 32 = 1547 0.09411569755491345" time="0.0000">
+    </testcase>
+        <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
+      name="test fails with 21 + 421 = 1547 0.09411569755491345" time="0.0000">
+    </testcase>
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
       name="test succeeds with 4464 + 2317 = 6781 0.7790935912260967" time="0.0000" />
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"

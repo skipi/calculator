@@ -18,6 +18,32 @@
         test/calculator/adder_test.exs:16: (test)
 </failure>
     </testcase>
+        <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
+      name="test fails with 321 + 32 = 1547 0.09411569755491345" time="0.0000">
+      <failure message="Assertion with == failed"> 1) test fails with 8531 + 6984 = 1547
+        0.09411569755491345 (Calculator.AdderTest)
+        test/calculator/adder_test.exs:15
+        Assertion with == failed
+        code: assert Calculator.Adder.run(8531, 6984) == 1547
+        left: 15515
+        right: 1547
+        stacktrace:
+        test/calculator/adder_test.exs:16: (test)
+</failure>
+    </testcase>
+        <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
+      name="test fails with 21 + 421 = 1547 0.09411569755491345" time="0.0000">
+      <failure message="Assertion with == failed"> 1) test fails with 8531 + 6984 = 1547
+        0.09411569755491345 (Calculator.AdderTest)
+        test/calculator/adder_test.exs:15
+        Assertion with == failed
+        code: assert Calculator.Adder.run(8531, 6984) == 1547
+        left: 15515
+        right: 1547
+        stacktrace:
+        test/calculator/adder_test.exs:16: (test)
+</failure>
+    </testcase>
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
       name="test succeeds with 4464 + 2317 = 6781 0.7790935912260967" time="0.0000" />
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
