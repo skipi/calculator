@@ -55,6 +55,7 @@
         right: 1547
         stacktrace:
         test/calculator/adder_test.exs:16: (test)
+    </failure>     
     </testcase>
     <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
       name="test succeeds with 4464 + 2317 = 6781 0.7790935912260967" time="0.0000" />
