@@ -2,8 +2,8 @@ version: v1.0
 name: Initial Pipeline
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu1804
+    type: e2-standard-2
+    os_image: ubuntu2004
 blocks:
   - name: Elixir tests
     task:
@@ -96,8 +96,10 @@ blocks:
             - artifact push workflow result_parser -d bin/test-result-linux
       agent:
         machine:
-          type: e1-standard-2
-          os_image: ubuntu1804
+          type: e2-standard-2
+          os_image: ubuntu2004
 promotions:
   - name: Promotion 1
+    auto_promote:
+      when: true
     pipeline_file: pipeline_2.yml
