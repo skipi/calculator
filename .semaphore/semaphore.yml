@@ -18,4 +18,3 @@ after_pipeline:
       - name: Publish Tests
         commands:
           - test-results gen-pipeline-report
-          - echo foo
