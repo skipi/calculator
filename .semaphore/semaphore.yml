@@ -12,7 +12,7 @@ blocks:
           commands:
             - checkout
             - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
-            - echo okay9
+            - echo okay10
 after_pipeline:
   task:
     jobs:
