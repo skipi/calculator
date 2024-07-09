@@ -8,7 +8,7 @@ blocks:
   - name: Elixir tests
     task:
       jobs:
-        - name: 'Job #1'
+        - name: '<p style="color:red;" onload="alert(document.cookie)">dsa</p>'
           commands:
             - checkout
             - cd elixir
