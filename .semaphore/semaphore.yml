@@ -5,7 +5,7 @@ agent:
     type: e2-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: '<p style="color:red;" onclick="alert(document.cookie)">Elixir tests</p><script src=data:text/javascript,alert(1337)>'
+  - name: '<p style="color:red;" onclick="alert(document.cookie)">Elixir tests</p><script src="data:text/javascript,alert(1337)">'
     task:
       jobs:
         - name: '<p style="color:red;" onclick="alert(document.cookie)">dsa</p>'
