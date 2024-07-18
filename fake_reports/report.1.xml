@@ -6,28 +6,28 @@
             <property name="seed" value="430315"/>
         </properties>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 8531 + 6984 = 1547 0.09411569755491345" time="0.0000">
+                  name="test fails with 8531 + 6984 = 15147 0.09411569755491345" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 321 + 32 = 1547 0.09411569755491345" time="0.0000">
+                  name="test fails with 321 + 32 = 11547 0.09411569755491345" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 21 + 421 = 1547 0.09411569755491345" time="0.0000">
+                  name="test fails with 21 + 421 = 11547 0.09411569755491345" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 622 + 421 = 1547 0.09411569755491345" time="0.0000">
+                  name="test fails with 622 + 421 = 11547 0.09411569755491345" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test succeeds with 4464 + 2317 = 6781 0.7790935912260967" time="0.0000">
+                  name="test succeeds with 4464 + 21317 = 6781 0.7790935912260967" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 6981 + 3883 = 3098 0.5046993437439501" time="0.0000">
+                  name="test fails with 6981 + 38813 = 3098 0.5046993437439501" time="0.0000">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 321 + 9932 = 1547 0.09411569755491345" time="0.0010">
+                  name="test fails with 321 + 99312 = 1547 0.09411569755491345" time="0.0010">
         </testcase>
         <testcase file="test/calculator/adder_test.exs" classname="Elixir.Calculator.AdderTest"
-                  name="test fails with 2199 + 421 = 1547 0.09411569755491345" time="0.0004">
+                  name="test fails with 2199 + 4211 = 1547 0.09411569755491345" time="0.0004">
         </testcase>
     </testsuite>
 </testsuites>
