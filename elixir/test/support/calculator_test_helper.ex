@@ -1,12 +1,9 @@
 defmodule CalculatorTestHelper do
-  defmacro define_test_results(runs, min, max, res_fun) do
-    0..runs
-    |> Enum.map(fn _ ->
-      {Enum.random(min..max), Enum.random(min..max)}
-    end)
-    |> Enum.map(fn {a, b} ->
+  defmacro define_test_results(min, max, res_fun) do
+    0..(max - min)
+    |> Enum.map(fn i ->
       quote do
-        {unquote(a), unquote(b), unquote(res_fun).(unquote(a), unquote(b))}
+        {unquote(min + i), unquote(max), unquote(res_fun).(unquote(min + i), unquote(max))}
       end
     end)
   end
