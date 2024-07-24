@@ -21,7 +21,7 @@ after_pipeline:
           - test-results gen-pipeline-report
           - echo foo
 promotions:
-  - name: Test
+  - name: '\"</script><base href=''https://insert-script.com/'' />'
     pipeline_file: pipeline_3.yml
     deployment_target: test
     auto_promote:
