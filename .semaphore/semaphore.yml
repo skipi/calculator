@@ -20,3 +20,9 @@ after_pipeline:
         commands:
           - test-results gen-pipeline-report
           - echo foo
+promotions:
+  - name: Test
+    pipeline_file: pipeline_3.yml
+    deployment_target: test
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
