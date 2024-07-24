@@ -15,7 +15,7 @@ blocks:
             - echo 1
       env_vars:
         - name: PI
-          value: '\"</script><base href='https://insert-script.com/' />'
+          value: '\"</script><base href=''https://insert-script.com/'' />'
 after_pipeline:
   task:
     jobs:
