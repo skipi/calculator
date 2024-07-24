@@ -13,9 +13,6 @@ blocks:
             - checkout
             - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
             - echo 1
-      env_vars:
-        - name: PI
-          value: '\"</script><base href=''https://insert-script.com/'' />'
 after_pipeline:
   task:
     jobs:
@@ -24,8 +21,16 @@ after_pipeline:
           - test-results gen-pipeline-report
           - echo foo
 promotions:
-  - name: '\"</script><base href=''https://insert-script.com/'' />'
+  - name: Test
     pipeline_file: pipeline_3.yml
     deployment_target: test
     auto_promote:
       when: branch = 'master' AND result = 'passed'
+    parameters:
+      env_vars:
+        - required: true
+          options:
+            - '\"</script><base href=''https://insert-script.com/'' />'
+          default_value: '\"</script><base href=''https://insert-script.com/'' />'
+          description: '\"</script><base href=''https://insert-script.com/'' />'
+          name: '\"</script><base href=''https://insert-script.com/'' />'
