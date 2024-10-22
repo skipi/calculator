@@ -4,6 +4,10 @@ agent:
   machine:
     type: e2-standard-2
     os_image: ubuntu2004
+
+auto_cancel:
+  running:
+    when: 'true'
 blocks:
   - name: 'Block #1'
     task:
@@ -29,3 +33,5 @@ promotions:
           default_value: bar
         - required: true
           name: BAR
+    auto_promote:
+      when: branch = 'foobar' AND result = 'passed'
