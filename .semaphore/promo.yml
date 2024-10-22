@@ -1,14 +1,14 @@
 version: v1.0
-name: Pipeline 2
+name: Promo ppl
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu1804
+    type: e2-standard-2
+    os_image: ubuntu2004
 blocks:
   - name: 'Block #1'
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - sleep 30
-            - echo "job 1"
+            - echo $FOO
+            - echo $BAR

@@ -7,17 +7,25 @@ agent:
 blocks:
   - name: 'Block #1'
     task:
+      secrets:
+        - name: sem api token
       jobs:
         - name: 'Job #1'
           commands:
             - echo $FOO
             - echo $BAR
+            - 'curl -H "Authorization: Token $API_TOKEN" -d "name=Promotion&pipeline_id=$SEMAPHORE_PIPELINE_ID&FOO=$FOO&BAR=$BAR&override=true"  -X POST "https://skipi.semaphoreci.com/api/v1alpha/promotions"'
 promotions:
-  - name: foobarbaz
-    pipeline_file: semaphore.yml
+  - name: Promotion
+    pipeline_file: promo.yml
     parameters:
       env_vars:
         - required: true
           name: FOO
+          options:
+            - bar
+            - baz
+            - bad
+          default_value: bar
         - required: true
           name: BAR
