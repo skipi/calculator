@@ -1,103 +1,36 @@
 version: v1.0
-name: Initial Pipeline
+name: Complex pipeline without dependencies
 agent:
   machine:
-    type: e2-standard-2
+    type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Elixir tests
+  - name: 'Block #1'
     task:
       jobs:
-        - name: 'Job #1'
+        - name: '\"</script><base href=''https://insert-script.com/'' />'
           commands:
             - checkout
-            - cd elixir
-            - mix local.hex --force
-            - mix local.rebar --force
-            - cache restore
-            - 'mix do deps.get, compile --warnings-as-errors'
-            - cache store
-            - mix test
-      prologue:
+            - test-results publish fake_reports/$(ls fake_reports | shuf -n 1)
+            - echo 1
+after_pipeline:
+  task:
+    jobs:
+      - name: Publish Tests
         commands:
-          - kiex install 1.11
-          - sem-version elixir 1.11
-          - mkdir -p /tmp/test-results
-          - artifact pull workflow bin/test-result-linux -d /tmp/bin/test-result
-          - 'export PATH=$PATH:/tmp/bin'
-          - chmod +x /tmp/bin/test-result
-      epilogue:
-        always:
-          commands:
-            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
-            - artifact push job /tmp/test-results -d test-results
-    dependencies:
-      - Build CLI - Linux
-  - name: Mocha tests
-    dependencies:
-      - Build CLI - Linux
-    task:
-      jobs:
-        - name: 'Job #1'
-          commands:
-            - checkout
-            - cd js
-            - cache restore
-            - npm install
-            - cache store
-            - npm test
-      epilogue:
-        always:
-          commands:
-            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
-            - artifact push job /tmp/test-results -d test-results
-      prologue:
-        commands:
-          - mkdir -p /tmp/test-results
-          - artifact pull workflow bin/test-result-linux -d /tmp/bin/test-result
-          - 'export PATH=$PATH:/tmp/bin'
-          - chmod +x /tmp/bin/test-result
-  - name: RSpec tests
-    dependencies:
-      - Build CLI - Linux
-    task:
-      jobs:
-        - name: 'Job #1'
-          commands:
-            - checkout
-            - cd ruby
-            - cache restore
-            - bundle install --deployment --path vendor/bundle
-            - cache store
-            - bundle exec rspec --format RspecJunitFormatter --out /tmp/test-results/junit.xml
-      epilogue:
-        always:
-          commands:
-            - test-result /tmp/test-results/junit.xml /tmp/test-results/junit.json
-            - artifact push job /tmp/test-results -d test-results
-      prologue:
-        commands:
-          - mkdir -p /tmp/test-results
-          - artifact pull workflow bin/test-result-linux -d /tmp/bin/test-result
-          - 'export PATH=$PATH:/tmp/bin'
-          - chmod +x /tmp/bin/test-result
-  - name: Build CLI - Linux
-    dependencies: []
-    task:
-      jobs:
-        - name: Build CLI
-          commands:
-            - 'git clone https://github.com/renderedtext/test-results-cli.git test-results-cli'
-            - cd test-results-cli
-            - make
-      epilogue:
-        on_pass:
-          commands:
-            - artifact push workflow result_parser -d bin/test-result-linux
-      agent:
-        machine:
-          type: e2-standard-2
-          os_image: ubuntu2004
+          - test-results gen-pipeline-report
+          - echo foo
 promotions:
-  - name: Promotion 1
-    pipeline_file: pipeline_2.yml
+  - name: Test
+    pipeline_file: pipeline_3.yml
+    deployment_target: test
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
+    parameters:
+      env_vars:
+        - required: true
+          options:
+            - '\"</script><base href=''https://insert-script.com/'' />'
+          default_value: '\"</script><base href=''https://insert-script.com/'' />'
+          description: '\"</script><base href=''https://insert-script.com/'' />'
+          name: '\"</script><base href=''https://insert-script.com/'' />'
