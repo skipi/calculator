@@ -13,7 +13,7 @@ blocks:
             - touch REPORT.md
             - 'echo "# HELLO!" >> REPORT.md'
             - echo "FROM MARKDOWN" >> REPORT.md
-            - artifacts push job -d .semaphore/REPORT.md REPORT.md
+            - artifact push job -d .semaphore/REPORT.md REPORT.md
             - checkout
             - cd elixir
             - mix local.hex --force
