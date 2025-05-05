@@ -1,5 +1,5 @@
 version: v1.0
-name: Initial Pipeline
+name: Pipeline 2
 agent:
   machine:
     type: f1-standard-2
@@ -10,10 +10,6 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - touch REPORT.md
-            - 'echo "# HELLO!" >> REPORT.md'
-            - echo "FROM MARKDOWN" >> REPORT.md
-            - artifacts push job -d .semaphore/REPORT.md REPORT.md
             - checkout
             - cd elixir
             - mix local.hex --force
@@ -35,19 +31,3 @@ after_pipeline:
       - name: Submit Reports
         commands:
           - test-results gen-pipeline-report
-promotions:
-  - name: Run tests with prefix
-    pipeline_file: prefixed_tests.yml
-    parameters:
-      env_vars:
-        - required: true
-          default_value: prefix
-          description: Test prefix
-          name: TEST_PREFIX
-        - required: true
-          options:
-            - 'true'
-            - 'false'
-          default_value: 'false'
-          description: Randomize failures
-          name: RANDOMIZE_FAILURES
