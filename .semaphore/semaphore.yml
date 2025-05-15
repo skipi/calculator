@@ -12,17 +12,6 @@ auto_cancel:
     when: branch != 'master'
   queued:
     when: branch = 'master'
-global_job_config:
-  prologue:
-    commands:
-      - checkout
-      - sem-service start postgres 17
-      - sem-service start redis 7
-      - sem-version ruby 3.2.2
-      - sem-version node 20.11.0
-      - cache restore
-      - yarn install --frozen-lockfile
-      - bundle install --deployment --path vendor/bundle
 blocks:
   - name: 'Block #1'
     dependencies: []
