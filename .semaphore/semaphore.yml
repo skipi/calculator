@@ -99,5 +99,5 @@ blocks:
           type: e2-standard-2
           os_image: ubuntu2004
 promotions:
-  - name: Promotion 1
+  - name: Promotion 1s
     pipeline_file: pipeline_2.yml
