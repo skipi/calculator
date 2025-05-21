@@ -2,15 +2,8 @@ version: v1.0
 name: Initial Pipeline
 agent:
   machine:
-    type: f1-standard-2
-    os_image: ubuntu2204
-global_job_config:
-  epilogue:
-    always:
-      commands:
-        - test-results command-metrics report.md
-        - test-results resource-metrics report.md
-        - artifact push job -d .semaphore/REPORT.md report.md
+    type: e2-standard-2
+    os_image: ubuntu2004
 blocks:
   - name: Elixir tests
     task:
@@ -93,12 +86,13 @@ blocks:
     task:
       jobs:
         - name: Build CLI
-          commands:
-            - test-results --version
+          commands: []
       epilogue:
-        on_pass:
+        always:
           commands:
-            - artifact push workflow result_parser -d bin/test-result-linux
+            - test-results command-metrics report.md
+            - test-results resource-metrics report.md
+            - artifact push job -d .semaphore/REPORT.md report.md
       agent:
         machine:
           type: e2-standard-2
