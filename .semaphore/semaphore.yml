@@ -10,14 +10,7 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - checkout
-            - cd elixir
-            - mix local.hex --force
-            - mix local.rebar --force
-            - cache restore
-            - 'mix do deps.get, compile --warnings-as-errors'
-            - cache store
-            - mix test
+            - test-results --version
       prologue:
         commands:
           - kiex install 1.11
